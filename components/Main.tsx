@@ -1,9 +1,11 @@
 "use client";
 
 import { initialUnits, SUBJECTS, Unit } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 
 const Main = ({ subject }: { subject: keyof typeof SUBJECTS }) => {
+  const router = useRouter();
   const [units, setUnits] = useState<Unit[]>(initialUnits[SUBJECTS[subject]]);
   const [loaded, setLoaded] = useState(false);
 
@@ -39,7 +41,7 @@ const Main = ({ subject }: { subject: keyof typeof SUBJECTS }) => {
   };
 
   const goBack = () => {
-    window.history.back();
+    router.back();
   };
 
   return (
