@@ -2,10 +2,30 @@
 
 import { SUBJECTS } from "@/lib/constants";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ProgressIndicator from "@/components/ProgressIndicator";
+import { calculateProgress } from "@/utils/calculateProgress";
+
+interface SubjectProgress {
+  [key: string]: number;
+}
 
 const Page = () => {
   const router = useRouter();
+  const [subjectProgress, setSubjectProgress] = useState<SubjectProgress>({});
+
+  useEffect(() => {
+    const progressMap: SubjectProgress = {};
+    Object.entries(SUBJECTS).forEach(([key]) => {
+      if (typeof window !== "undefined") {
+        const units = JSON.parse(
+          localStorage.getItem(`${key}-checklist`) || "[]",
+        );
+        progressMap[key] = calculateProgress(units);
+      }
+    });
+    setSubjectProgress(progressMap);
+  }, []);
 
   const handleClick = (subject: string) => {
     router.push(`/subject/${subject}`);
@@ -18,33 +38,45 @@ const Page = () => {
           Available Subjects
         </h1>
         <div className="space-y-6">
-          {Object.entries(SUBJECTS).map(([key, name]) => (
-            <div
-              key={key}
-              className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-2xl font-semibold text-gray-800">{name}</h2>
-                <span className="text-sm font-medium text-blue-600">{key}</span>
+          {Object.entries(SUBJECTS).map(([key, name]) => {
+            const progress = subjectProgress[key] || 0;
+
+            return (
+              <div
+                key={key}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+              >
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-2xl font-semibold text-gray-800">
+                    {name}
+                  </h2>
+                  <div className="flex items-center mt-4 space-x-4">
+                    <ProgressIndicator
+                      progress={progress}
+                      size={48}
+                      strokeWidth={4}
+                    />
+                  </div>
+                </div>
+                <div className="grid gap-2">
+                  <p className="text-gray-700">
+                    <strong>Code:</strong> {key}
+                  </p>
+                  <p className="text-gray-700">
+                    <strong>Description:</strong> {name} is an in-depth course
+                    focused on the fundamental and advanced topics of{" "}
+                    {name.toLowerCase()}.
+                  </p>
+                  <button
+                    className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:shadow-xl transition-all"
+                    onClick={() => handleClick(key)}
+                  >
+                    Go to {key} Tracker
+                  </button>
+                </div>
               </div>
-              <div className="grid gap-2">
-                <p className="text-gray-700">
-                  <strong>Code:</strong> {key}
-                </p>
-                <p className="text-gray-700">
-                  <strong>Description:</strong> {name} is an in-depth course
-                  focused on the fundamental and advanced topics of{" "}
-                  {name.toLowerCase()}.
-                </p>
-                <button
-                  className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:shadow-xl transition-all"
-                  onClick={() => handleClick(key)}
-                >
-                  Go to {key} Tracker
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>
