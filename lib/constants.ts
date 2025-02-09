@@ -13,6 +13,7 @@ export type SubjectsStructure = Record<string, Unit[]>;
 export const SUBJECTS = {
   NNDL: "Neral Networks and Deep Learning",
   RL: "Reinforcement Learning",
+  WS: "Web Security",
 };
 
 export const initialUnits: SubjectsStructure = {
@@ -189,6 +190,92 @@ export const initialUnits: SubjectsStructure = {
         { name: "Experience replay", completed: false },
         { name: "Fitted Q Iteration", completed: false },
         { name: "Case studies", completed: false },
+      ],
+    },
+  ],
+  [SUBJECTS.WS]: [
+    {
+      title: "Unit I",
+      topics: [
+        { name: "The Web Security", completed: false },
+        { name: "The Web Security Problem", completed: false },
+        { name: "Risk Analysis and Best Practices", completed: false },
+        { name: "Cryptography and Web Security", completed: false },
+        {
+          name: "Working Cryptographic Systems and Protocols",
+          completed: false,
+        },
+        { name: "Legal Restrictions on Cryptography", completed: false },
+        { name: "Digital Identification", completed: false },
+      ],
+    },
+    {
+      title: "Unit II",
+      topics: [
+        { name: "The Web’s War on Your Privacy", completed: false },
+        { name: "Privacy-Protecting Techniques", completed: false },
+        { name: "Backups and Antitheft", completed: false },
+        { name: "Web Server Security", completed: false },
+        { name: "Physical Security for Servers", completed: false },
+        { name: "Host Security for Servers", completed: false },
+        { name: "Securing Web Applications", completed: false },
+      ],
+    },
+    {
+      title: "Unit III",
+      topics: [
+        {
+          name: "Recent Advances in Access Control",
+          completed: false,
+        },
+        { name: "Access Control Models for XML", completed: false },
+        {
+          name: "Database Issues in Trust Management and Trust Negotiation",
+          completed: false,
+        },
+        {
+          name: "Security in Data Warehouses and OLAP Systems",
+          completed: false,
+        },
+      ],
+    },
+    {
+      title: "Unit IV",
+      topics: [
+        {
+          name: "Security Re-engineering for Databases: Concepts and Techniques",
+          completed: false,
+        },
+        {
+          name: "Database Watermarking for Copyright Protection",
+          completed: false,
+        },
+        { name: "Trustworthy Records Retention", completed: false },
+        {
+          name: "Damage Quarantine and Recovery in Data Processing Systems",
+          completed: false,
+        },
+        {
+          name: "Hippocratic Databases: Current Capabilities and Future Trends",
+          completed: false,
+        },
+      ],
+    },
+    {
+      title: "Unit V",
+      topics: [
+        {
+          name: "Privacy in Database Publishing: A Bayesian Perspective",
+          completed: false,
+        },
+        {
+          name: "Privacy-enhanced Location-based Access Control",
+          completed: false,
+        },
+        {
+          name: "Efficiently Enforcing the Security and Privacy Policies in a Mobile Environment",
+          completed: false,
+        },
       ],
     },
   ],
