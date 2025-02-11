@@ -8,7 +8,7 @@ interface ProgressIndicatorProps {
 
 const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
   progress,
-  size = 48,
+  size = 24,
   strokeWidth = 4,
 }) => {
   const radius = (size - strokeWidth) / 2;
@@ -16,8 +16,13 @@ const ProgressIndicator: React.FC<ProgressIndicatorProps> = ({
   const offset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="relative inline-block">
-      <svg width={size} height={size} className="transform -rotate-90">
+    <div className="relative inline-block w-10 h-10 sm:w-8 sm:h-8 md:w-12 md:h-12 lg:w-14 lg:h-14">
+      <svg
+        width="100%"
+        height="100%"
+        viewBox={`0 0 ${size} ${size}`}
+        className="transform -rotate-90"
+      >
         <circle
           cx={size / 2}
           cy={size / 2}

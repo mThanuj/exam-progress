@@ -62,11 +62,6 @@ const Page = () => {
                   <p className="text-gray-700">
                     <strong>Code:</strong> {key}
                   </p>
-                  <p className="text-gray-700">
-                    <strong>Description:</strong> {name} is an in-depth course
-                    focused on the fundamental and advanced topics of{" "}
-                    {name.toLowerCase()}.
-                  </p>
                   <button
                     className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:shadow-xl transition-all"
                     onClick={() => handleClick(key)}

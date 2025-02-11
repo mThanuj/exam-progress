@@ -11,9 +11,10 @@ export interface Unit {
 export type SubjectsStructure = Record<string, Unit[]>;
 
 export const SUBJECTS = {
-  NNDL: "Neral Networks and Deep Learning",
-  RL: "Reinforcement Learning",
+  FBA: "Fundamentals of Biomedical Applications",
   WS: "Web Security",
+  RL: "Reinforcement Learning",
+  NNDL: "Neral Networks and Deep Learning",
 };
 
 export const initialUnits: SubjectsStructure = {
@@ -274,6 +275,153 @@ export const initialUnits: SubjectsStructure = {
         },
         {
           name: "Efficiently Enforcing the Security and Privacy Policies in a Mobile Environment",
+          completed: false,
+        },
+      ],
+    },
+  ],
+  [SUBJECTS.FBA]: [
+    {
+      title: "Unit I",
+      topics: [
+        {
+          name: "Components of Medical Instrumentation System",
+          completed: false,
+        },
+        {
+          name: "Static and Dynamic Characteristics of medical instruments",
+          completed: false,
+        },
+        {
+          name: "Problems encountered with measurements from human beings",
+          completed: false,
+        },
+        {
+          name: "Organization of Cell: Derivation of Nernst Equation",
+          completed: false,
+        },
+        {
+          name: "Generation of action potential and refractory periods",
+          completed: false,
+        },
+        {
+          name: "Propagation methods of action potentials",
+          completed: false,
+        },
+        {
+          name: "Static and Dynamic Characteristics of medical instruments",
+          completed: false,
+        },
+      ],
+    },
+    {
+      title: "Unit II",
+      topics: [
+        {
+          name: "Medical Recorders: Classification of Recorders",
+          completed: false,
+        },
+        {
+          name: "Genral features of Ink-Jet",
+          completed: false,
+        },
+        {
+          name: "PMMC writing systems",
+          completed: false,
+        },
+        {
+          name: "Basics of Bio Cheminal Electrodes",
+          completed: false,
+        },
+        {
+          name: "Electrocardiography: Electrical conduction system of heart, electrodes and their placement",
+          completed: false,
+        },
+        {
+          name: "Standard 12 - Lead Configurations",
+          completed: false,
+        },
+        {
+          name: "Interpretation of ECG waveform with respect to electro-mechanical activity of the heart",
+          completed: false,
+        },
+      ],
+    },
+    {
+      title: "Unit III",
+      topics: [
+        {
+          name: "Blood Pressure Measurement: Introduction to Blood Pressure",
+          completed: false,
+        },
+        {
+          name: "Blood Pressure measurement methods",
+          completed: false,
+        },
+        {
+          name: "Blood Flow Measurement methods",
+          completed: false,
+        },
+        {
+          name: "Phonocardiography",
+          completed: false,
+        },
+      ],
+    },
+    {
+      title: "Unit IV",
+      topics: [
+        {
+          name: "Basics of Pacemakers",
+          completed: false,
+        },
+        {
+          name: "Defibrillator",
+          completed: false,
+        },
+        {
+          name: "Electrotherapy and its Applications",
+          completed: false,
+        },
+        {
+          name: "Dialysis and its Significance",
+          completed: false,
+        },
+      ],
+    },
+    {
+      title: "Unit V",
+      topics: [
+        {
+          name: "EEG Block Diagram, electrodes and their placement",
+          completed: false,
+        },
+        {
+          name: "EMG Block Diagram, electrodes and their placement",
+          completed: false,
+        },
+        {
+          name: "Study of Neuromuscular Junction",
+          completed: false,
+        },
+        {
+          name: "Nerve conduction velocity using EMG",
+          completed: false,
+        },
+        {
+          name: "Respiratory Instrumentation: Mechanism of Respiration",
+          completed: false,
+        },
+        {
+          name: "Spirometry",
+          completed: false,
+        },
+        {
+          name: "Pnemuotachograph and its Types",
+          completed: false,
+        },
+        {
+          name: "Ventilators and its Mode of Operation",
           completed: false,
         },
       ],
