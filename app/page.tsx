@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ProgressIndicator from "@/components/ProgressIndicator";
 import { calculateProgress } from "@/utils/calculateProgress";
+import Loader from "@/components/Loader";
 
 interface SubjectProgress {
   [key: string]: number;
@@ -15,20 +16,20 @@ const Page = () => {
   const [subjectProgress, setSubjectProgress] = useState<SubjectProgress>({});
   const [loading, setLoading] = useState(true);
 
-  // Check for a valid session
   useEffect(() => {
     (async () => {
       const res = await fetch("/api/auth/session");
       const data = await res.json();
       if (!data.session) {
         router.push("/login");
+      } else if (data.session.user.email === "mullagurithanuj0@gmail.com") {
+        router.push("/admin");
       } else {
         setLoading(false);
       }
     })();
   }, [router]);
 
-  // Calculate progress for each subject
   useEffect(() => {
     const progressMap: SubjectProgress = {};
     Object.entries(SUBJECTS).forEach(([key]) => {
@@ -48,14 +49,7 @@ const Page = () => {
 
   // Render a beautiful loader until the session is validated
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-blue-600 border-gray-200"></div>
-          <p className="mt-4 text-xl text-blue-600">Loading...</p>
-        </div>
-      </div>
-    );
+    return <Loader />;
   }
 
   // Render the main page once the session is valid
