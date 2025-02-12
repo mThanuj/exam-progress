@@ -136,7 +136,7 @@ export const initialUnits: SubjectsStructure = {
       title: "Unit II",
       topics: [
         { name: "Markov Decision Problem", completed: false },
-        { name: "policy and value function", completed: false },
+        { name: "Policy and Value function", completed: false },
         {
           name: "Reward models (infinite discounted, total, finitehorizon, and average)",
           completed: false,
@@ -306,10 +306,6 @@ export const initialUnits: SubjectsStructure = {
         },
         {
           name: "Propagation methods of action potentials",
-          completed: false,
-        },
-        {
-          name: "Static and Dynamic Characteristics of medical instruments",
           completed: false,
         },
       ],
