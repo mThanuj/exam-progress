@@ -4,13 +4,13 @@ import { progress } from "@/drizzle/schema";
 import { and, eq } from "drizzle-orm";
 import { auth } from "@/auth";
 
-async function getUserEmail(request: Request): Promise<string | null> {
+async function getUserEmail(): Promise<string | null> {
   const session = await auth();
   return session?.user?.email ?? null;
 }
 
 export async function GET(request: Request) {
-  const userEmail = await getUserEmail(request);
+  const userEmail = await getUserEmail();
   if (!userEmail) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -41,7 +41,7 @@ export async function GET(request: Request) {
 }
 
 export async function PUT(request: Request) {
-  const userEmail = await getUserEmail(request);
+  const userEmail = await getUserEmail();
   if (!userEmail) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
