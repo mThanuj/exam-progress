@@ -1,48 +1,24 @@
-import { pgTable, text, uuid, primaryKey, boolean } from "drizzle-orm/pg-core";
-
-export const subjects = pgTable("subjects", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  name: text("name").notNull().unique(),
-  code: text("code").notNull().unique(),
-});
-
-export const units = pgTable("units", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  subjectId: uuid("subject_id")
-    .notNull()
-    .references(() => subjects.id),
-  title: text("title").notNull(),
-});
-
-export const topics = pgTable("topics", {
-  id: uuid("id").primaryKey().defaultRandom(),
-  unitId: uuid("unit_id")
-    .notNull()
-    .references(() => units.id),
-  name: text("name").notNull(),
-});
+import {
+  pgTable,
+  uuid,
+  varchar,
+  jsonb,
+  timestamp,
+  text,
+} from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
-  name: text("name").notNull(),
-  email: text("email").notNull().unique(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull().unique(),
 });
 
-export const userTopicProgress = pgTable(
-  "user_topic_progress",
-  {
-    userId: uuid("user_id")
-      .notNull()
-      .references(() => users.id),
-    topicId: uuid("topic_id")
-      .notNull()
-      .references(() => topics.id),
-    completed: boolean("completed").notNull().default(false),
-  },
-  (table) => [
-    primaryKey({
-      name: "user_topic_progress_pk",
-      columns: [table.userId, table.topicId],
-    }),
-  ],
-);
+export const progress = pgTable("progress", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: varchar("user_id", { length: 255 })
+    .notNull()
+    .references(() => users.email),
+  subject: text("subject").notNull(),
+  data: jsonb("data").notNull(),
+  updatedAt: timestamp("updated_at", { mode: "string" }).defaultNow().notNull(),
+});

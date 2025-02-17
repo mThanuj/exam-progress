@@ -1,14 +1,16 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import { db } from "./drizzle";
+import { progress } from "./drizzle/schema";
 import { users } from "./drizzle/schema";
+import { initialUnits, SUBJECTS } from "./lib/constants";
 import { eq } from "drizzle-orm";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     GoogleProvider({
-      clientId: process.env.AUTH_GOOGLE_ID,
-      clientSecret: process.env.AUTH_GOOGLE_SECRET,
+      clientId: process.env.AUTH_GOOGLE_ID!,
+      clientSecret: process.env.AUTH_GOOGLE_SECRET!,
     }),
   ],
   callbacks: {
@@ -26,6 +28,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       if (emailExists.length === 0) {
         await db.insert(users).values({ name, email });
+
+        for (const subject of Object.values(SUBJECTS)) {
+          await db.insert(progress).values({
+            userId: email,
+            subject: subject,
+            data: initialUnits[subject],
+          });
+        }
       }
 
       return true;

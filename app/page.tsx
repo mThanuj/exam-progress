@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import ProgressIndicator from "@/components/ProgressIndicator";
 import { calculateProgress } from "@/utils/calculateProgress";
 import Loader from "@/components/Loader";
+import { signOutAction } from "@/actions/auth.action";
 
 interface SubjectProgress {
   [key: string]: number;
@@ -31,37 +32,54 @@ const Page = () => {
   }, [router]);
 
   useEffect(() => {
-    const progressMap: SubjectProgress = {};
-    Object.entries(SUBJECTS).forEach(([key]) => {
-      if (typeof window !== "undefined") {
-        const units = JSON.parse(
-          localStorage.getItem(`${key}-checklist`) || "[]",
-        );
-        progressMap[key] = calculateProgress(units);
-      }
-    });
-    setSubjectProgress(progressMap);
-  }, []);
+    const fetchProgress = async () => {
+      const res = await fetch("/api/progress");
+      const data = await res.json();
+
+      const progressMap: SubjectProgress = {};
+
+      data.forEach((element) => {
+        progressMap[element.subject] = calculateProgress(element.data);
+      });
+
+      setSubjectProgress(progressMap);
+    };
+
+    fetchProgress();
+  }, [router]);
 
   const handleClick = (subject: string) => {
     router.push(`/subject/${subject}`);
   };
 
-  // Render a beautiful loader until the session is validated
   if (loading) {
     return <Loader />;
   }
 
-  // Render the main page once the session is valid
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4 sm:p-8">
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-          Available Subjects
-        </h1>
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 mb-8">
+          <h1 className="text-3xl sm:text-4xl font-bold text-center md:text-left bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
+            Available Subjects
+          </h1>
+          <form
+            action={signOutAction}
+            className="w-full md:w-auto flex justify-center md:justify-end"
+          >
+            <button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition-all w-full md:w-auto"
+            >
+              Sign Out
+            </button>
+          </form>
+        </div>
         <div className="space-y-6">
           {Object.entries(SUBJECTS).map(([key, name]) => {
-            const progress = subjectProgress[key] || 0;
+            const curSub = key as keyof typeof SUBJECTS;
+            const progress = subjectProgress[SUBJECTS[curSub]] || 0;
+
             return (
               <div
                 key={key}

@@ -2,24 +2,35 @@
 
 import ProgressIndicator from "@/components/ProgressIndicator";
 import UnitCard from "@/components/UnitCard";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { initialUnits, SUBJECTS, Unit } from "@/lib/constants";
+import { SUBJECTS, Unit } from "@/lib/constants";
 import { calculateProgress } from "@/utils/calculateProgress";
 import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function Page() {
   const params = useParams();
   const subject = params.subject as keyof typeof SUBJECTS;
 
   const router = useRouter();
-  const storageKey = `${subject}-checklist`;
-  let allUnits = JSON.parse(localStorage.getItem(storageKey) || "[]");
-  if (!allUnits || allUnits.length === 0) {
-    allUnits = initialUnits[SUBJECTS[subject]];
-  }
-  const [units, setUnits] = useLocalStorage<Unit[]>(storageKey, allUnits);
+  const [units, setUnits] = useState<Unit[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const toggleTopic = (unitIndex: number, topicIndex: number) => {
+  useEffect(() => {
+    const fetchUnits = async () => {
+      const res = await fetch(`/api/progress?subject=${SUBJECTS[subject]}`);
+      const data = await res.json();
+      if (data.error) {
+        console.error("Error fetching data:", data.error);
+      } else {
+        setUnits(data);
+      }
+      setLoading(false);
+    };
+
+    fetchUnits();
+  }, [subject]);
+
+  const toggleTopic = async (unitIndex: number, topicIndex: number) => {
     const updatedUnits = units.map((unit, uIndex) => {
       if (uIndex === unitIndex) {
         const updatedTopics = unit.topics.map((topic, tIndex) =>
@@ -31,8 +42,19 @@ export default function Page() {
       }
       return unit;
     });
+
     setUnits(updatedUnits);
+
+    await fetch(`/api/progress`, {
+      method: "PUT",
+      body: JSON.stringify({ subject: SUBJECTS[subject], units: updatedUnits }),
+      headers: { "Content-Type": "application/json" },
+    });
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-4 sm:p-8">

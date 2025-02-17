@@ -1,6 +1,6 @@
 "use client";
 
-import { signInAction } from "@/actions/signInAction.server";
+import { signInAction } from "@/actions/auth.action";
 
 export default function SignIn() {
   const providers = ["google"];
