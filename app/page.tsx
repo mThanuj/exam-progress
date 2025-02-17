@@ -1,6 +1,6 @@
 "use client";
 
-import { SUBJECTS } from "@/lib/constants";
+import { SUBJECTS, Unit } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import ProgressIndicator from "@/components/ProgressIndicator";
@@ -38,7 +38,7 @@ const Page = () => {
 
       const progressMap: SubjectProgress = {};
 
-      data.forEach((element) => {
+      data.forEach((element: { subject: string; data: Unit[] }) => {
         progressMap[element.subject] = calculateProgress(element.data);
       });
 
