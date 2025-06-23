@@ -49,7 +49,6 @@ export async function PUT(request: Request) {
   const body = await request.json();
 
   const { subject, units } = body;
-  console.log(subject, units);
 
   await db
     .update(progress)

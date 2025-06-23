@@ -38,7 +38,7 @@ const Page = () => {
 
       const progressMap: SubjectProgress = {};
 
-      data.forEach((element: { subject: string; data: Unit[] }) => {
+      data?.forEach((element: { subject: string; data: Unit[] }) => {
         progressMap[element.subject] = calculateProgress(element.data);
       });
 

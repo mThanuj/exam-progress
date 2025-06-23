@@ -16,9 +16,154 @@ export const SUBJECTS = {
   WS: "Web Security",
   RL: "Reinforcement Learning",
   NNDL: "Neral Networks and Deep Learning",
+  OB: "Organizational Behavior",
 };
 
 export const initialUnits: SubjectsStructure = {
+  [SUBJECTS.OB]: [
+    {
+      title: "Unit I",
+      topics: [
+        { name: "Introduction to OB", completed: false },
+        { name: "Definition, Nature and Scope", completed: false },
+        { name: "Environmental and organizational context", completed: false },
+        {
+          name: "Impact of IT",
+          completed: false,
+        },
+        {
+          name: "Globalization",
+          completed: false,
+        },
+        {
+          name: "Diversity",
+          completed: false,
+        },
+        {
+          name: "Ethics",
+          completed: false,
+        },
+        {
+          name: "Culture",
+          completed: false,
+        },
+        {
+          name: "Reward systems and Organizational design",
+          completed: false,
+        },
+        { name: "Nature and importance of Perception", completed: false },
+        { name: "Perceptual selectivity and organization", completed: false },
+        { name: "Social perception", completed: false },
+        { name: "Attribution Theories", completed: false },
+        { name: "Locus of control", completed: false },
+        { name: "Attribution Errors", completed: false },
+        { name: "Impression Management", completed: false },
+      ],
+    },
+    {
+      title: "Unit II",
+      topics: [
+        {
+          name: "Cognitive Processes-II: Personality and Attitudes",
+          completed: false,
+        },
+        { name: "Personality as a continuum", completed: false },
+        { name: "Meaning of personality", completed: false },
+        { name: "Johari Window and Transactional Analysis", completed: false },
+        { name: "Nature and Dimension of Attitudes", completed: false },
+        {
+          name: "Job satisfaction and organizational commitment",
+          completed: false,
+        },
+        { name: "Motivational needs and processes", completed: false },
+        {
+          name: "Work-Motivation Approaches Theories of Motivation",
+          completed: false,
+        },
+        { name: "Motivation across cultures", completed: false },
+        {
+          name: "Positive organizational behaviour: Optimism",
+          completed: false,
+        },
+        { name: "Emotional intelligence", completed: false },
+        { name: "Self-Efficacy", completed: false },
+      ],
+    },
+    {
+      title: "Unit III",
+      topics: [
+        { name: "Dynamics of OB-I: Communication", completed: false },
+        { name: "Types of communication", completed: false },
+        {
+          name: "Interactive communication in organizations",
+          completed: false,
+        },
+        {
+          name: "Barriers to communication ",
+          completed: false,
+        },
+        {
+          name: "Strategies to improve the flow of communication",
+          completed: false,
+        },
+        {
+          name: "Decision Making: Participative decision-making techniques",
+          completed: false,
+        },
+        { name: "Creativity and group decision making", completed: false },
+        { name: "Dynamics of OB-II: Stress and Conflict", completed: false },
+        { name: "Meaning and types of stress", completed: false },
+        { name: "Meaning and types of conflict", completed: false },
+        {
+          name: "Effect of stress and intra-individual conflict",
+          completed: false,
+        },
+        {
+          name: "Strategies to cope with stress and conflict",
+          completed: false,
+        },
+      ],
+    },
+    {
+      title: "Unit IV",
+      topics: [
+        { name: "Dynamics of OB-III: Power and Politics", completed: false },
+        { name: "Meaning and types of power", completed: false },
+        { name: "Empowerment", completed: false },
+        { name: "Groups Vs. Teams", completed: false },
+        { name: "Nature of groups", completed: false },
+        { name: "Dynamics of informal groups", completed: false },
+        { name: "Dysfunctions of groups and teams", completed: false },
+        { name: "Teams in modern work place", completed: false },
+      ],
+    },
+    {
+      title: "Unit V",
+      topics: [
+        { name: "Leading High performance", completed: false },
+        {
+          name: "Job design and Goal setting for High performance",
+          completed: false,
+        },
+        { name: "Quality of Work Life", completed: false },
+        {
+          name: "Socio technical Design and High-performance work practices",
+          completed: false,
+        },
+        { name: "Behavioural performance management", completed: false },
+        {
+          name: "Reinforcement and punishment as principles of Learning",
+          completed: false,
+        },
+        { name: "Process of Behavioural modification", completed: false },
+        { name: "Leadership theories", completed: false },
+        {
+          name: "Styles, Activities and skills of Great leaders",
+          completed: false,
+        },
+      ],
+    },
+  ],
   [SUBJECTS.NNDL]: [
     {
       title: "Unit I",
